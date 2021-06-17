@@ -1,0 +1,29 @@
+{
+  "name": "exif-js",
+  "version": "3.0.0",
+  "description": "Extract EXIF data from JPEG and TIFF files",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graymalkin/exif-js.git"
+  },
+  "keywords": [
+    "exif",
+    "jpeg",
+    "tiff"
+  ],
+  "author": "Simon Cooksey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graymalkin/exif-js/issues"
+  },
+  "homepage": "https://github.com/graymalkin/exif-js#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3",
+    "webpack-cli": "^4.7.2"
+  }
+}
