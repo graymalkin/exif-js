@@ -31,6 +31,7 @@
   "devDependencies": {
     "http-server": "^0.12.3",
     "jest-extended": "^0.11.5",
+    "jest-fetch-mock": "^3.0.3",
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {

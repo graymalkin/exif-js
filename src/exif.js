@@ -8,23 +8,22 @@ class EXIF {
   iptc_data = null;
   xmpd_data = null;
 
+  complete = null;
+
   /** 
    *   @param {src} string URL of image to be loaded
    */
   constructor (src) {
     this.src = src;
-    fetch(src).then((r) => {
-      if (r.status == 200 || r.status === 0) {
-        r.arrayBuffer().then((data) => this.parse(data))
-      } else {
-        throw "Could not load image";
-      }
-    });
+    this.complete = fetch(src)
+      .then((response) => response.arrayBuffer())
+      .then((buffer) => this.parse(buffer))
+      .then(() => this);
   }
 
   parse(data) {
     this.exif_data = this.findEXIFinJPEG(data) || {};
-    // this.iptc_data = findIPTCinJPEG(data); || {};
+    // this.iptc_data = this.findIPTCinJPEG(data) || {};
     // if (EXIF.isXmpEnabled) {
     //     this.xmp_data = findXMPinJPEG(data); || {};               
     // }
@@ -39,7 +38,7 @@ class EXIF {
     }
 
     let length = file.byteLength;
-    var offset = 2;
+    let offset = 2;
     var marker;
 
     while (offset < length) {
