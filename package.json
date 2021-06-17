@@ -4,8 +4,14 @@
   "description": "Extract EXIF data from JPEG and TIFF files",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "http-server"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ]
   },
   "repository": {
     "type": "git",
@@ -24,6 +30,12 @@
   "homepage": "https://github.com/graymalkin/exif-js#readme",
   "devDependencies": {
     "http-server": "^0.12.3",
+    "jest-extended": "^0.11.5",
     "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "jest": "^27.0.4",
+    "mocha": "^8.4.0",
+    "mocha-loader": "^5.1.5"
   }
 }

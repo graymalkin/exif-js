@@ -1,4 +1,4 @@
-const EXIFTags = {
+const ExifTags = {
   // version tags
   0x9000 : "ExifVersion",             // EXIF version
   0xA000 : "FlashpixVersion",         // Flashpix format version
@@ -304,4 +304,4 @@ const StringValues = {
   }
 };
 
-export { EXIFTags, TiffTags, GPSTags, IFD1Tags, StringValues }
+export { ExifTags, TiffTags, GPSTags, IFD1Tags, StringValues }
