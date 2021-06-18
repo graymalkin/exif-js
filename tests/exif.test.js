@@ -19,16 +19,9 @@ test('extract basic exif data', () => {
 it('can not read non-existant file', async () => {
   expect.assertions(1);
   const e = new exif.EXIF("this/file/is/gone");
-  await expect(e.complete).rejects.toEqual(expect.anything());
+  await expect(e.complete).rejects.toThrow(new RangeError("Offset is outside the bounds of the DataView"));
 }
 );
-
-// it('gets the camera manufacturer', async () => {
-//   const e = new exif.EXIF("./demo/demo.jpeg");
-//   await e.complete;
-//   const model = e.exif_data.Model;
-//   expect(model).toEqual("Canon EOS 100D");
-// });
 
 describe('parsing jpegs', () => {
   beforeEach(() => {
@@ -36,21 +29,23 @@ describe('parsing jpegs', () => {
   });
 
   it('opening malformed jpeg throws', async () => {
+    expect.assertions(3);
     fetch.once("nonsense, very much not a jpeg");
     const e = new exif.EXIF("./wibble.jpeg");
-    expect(e.complete).resolves.toThrow();
+    expect(e.complete).rejects.toThrow("file is not a jpeg");
 
-    expect(fetch.mock.calls.length).toEqual(1)
-    expect(fetch.mock.calls[0][0]).toEqual("./wibble.jpeg")
+    expect(fetch.mock.calls.length).toEqual(1);
+    expect(fetch.mock.calls[0][0]).toEqual("./wibble.jpeg");
   });
 
   it('extracting manufacturer from jpeg', async () => {
+    expect.assertions(3);
     fetch.once(fs.readFileSync(`${__dirname}/test-data/zabriskie.jpeg`));
     const e = new exif.EXIF("./zabriskie.jpeg");
     await e.complete;
-    expect(e.exif_data.Model).toEqual("Canon EOS 100D");
+    expect(e.parsed.exif_data.Model).toEqual("Canon EOS 100D");
 
-    expect(fetch.mock.calls.length).toEqual(1)
-    expect(fetch.mock.calls[0][0]).toEqual("./zabriskie.jpeg")
+    expect(fetch.mock.calls.length).toEqual(1);
+    expect(fetch.mock.calls[0][0]).toEqual("./zabriskie.jpeg");
   });
 });
