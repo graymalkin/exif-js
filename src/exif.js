@@ -18,6 +18,9 @@ class EXIF {
       .then(() => this);
   }
 
+  getEXIFField(field) {
+    return this.parsed.exif_data[field];
+  }
 }
 
 export { EXIF }

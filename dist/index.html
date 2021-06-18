@@ -4,6 +4,20 @@
     <title>Test document</title>
   </head>
   <body>
+    <img id="myPicture" src="../demo/demo.jpeg" alt="Zabriskie point" />
+    <p><span id="exif"></span></p>
     <script src="./exif.js"></script>
+    <script>
+      let imgElem = document.getElementById("myPicture");
+      let exifDetails = document.getElementById("exif");
+      var e = new exif.EXIF(imgElem.attributes.src.value);
+      e.complete.then(() => {
+        let iso = e.parsed.exif_data["ISOSpeedRatings"];
+        let aperture = e.parsed.exif_data["FNumber"];
+        let focal = e.parsed.exif_data["FocalLength"];
+        console.log(e.parsed);
+        exifDetails.innerHTML = `ISO: ${iso}; Aperture: f/${aperture}; Focal length: ${focal}mm`;
+      });
+    </script>
   </body>
 </html>

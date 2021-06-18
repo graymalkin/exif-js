@@ -20,8 +20,7 @@ it('can not read non-existant file', async () => {
   expect.assertions(1);
   const e = new exif.EXIF("this/file/is/gone");
   await expect(e.complete).rejects.toThrow(new RangeError("Offset is outside the bounds of the DataView"));
-}
-);
+});
 
 describe('parsing jpegs', () => {
   beforeEach(() => {
